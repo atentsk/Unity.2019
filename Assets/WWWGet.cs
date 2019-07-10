@@ -42,7 +42,10 @@ public class WWWGet : MonoBehaviour
     }
     IEnumerator GetTexture()
     {
-        UnityWebRequest www = UnityWebRequestTexture.GetTexture("http://www.my-server.com/image.png");
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(
+            // 접근 가능한 이미지 파일 링크
+            "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+            );
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)
@@ -54,6 +57,9 @@ public class WWWGet : MonoBehaviour
             Texture myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
 
             Debug.LogFormat("{0}:\nReceived: {1}", www.url, myTexture.texelSize);
+            // 완료후 텍스쳐 적용
+            if(GetComponent<Renderer>()!=null)
+                GetComponent<Renderer>().material.mainTexture = myTexture;
         }
     }
 }
