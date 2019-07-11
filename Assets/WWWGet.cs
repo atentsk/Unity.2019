@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 // UnityWebRequest example
@@ -54,12 +55,21 @@ public class WWWGet : MonoBehaviour
         }
         else
         {
-            Texture myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+            Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
 
             Debug.LogFormat("{0}:\nReceived: {1}", www.url, myTexture.texelSize);
             // 완료후 텍스쳐 적용
-            if(GetComponent<Renderer>()!=null)
-                GetComponent<Renderer>().material.mainTexture = myTexture;
+            Renderer renderer = GetComponent<Renderer>();
+            Image image = GetComponent<Image>();
+            if (renderer != null)
+                renderer.material.mainTexture = myTexture;
+            else if (image != null)
+            {
+                image.sprite = Sprite.Create(myTexture, 
+                    Rect.MinMaxRect(0, 0, myTexture.width, myTexture.height), 
+                    Vector2.zero);
+                image.SetNativeSize();
+            }
         }
     }
 }
