@@ -6,6 +6,4 @@ Version : Unity 2019.1.*f
 2. Light Map : Scenes/LightMap.unity
 3. Simple UI : Scenes/UI.unity
 4. Navigation : Scenes/Navigation.unity
- NavMesh & NavMeshAgent
 5. Network : Scenes/Network.unity
- echoServer&Client
