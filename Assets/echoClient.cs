@@ -35,6 +35,8 @@ public class echoClient : MonoBehaviour
     {
         if(msgs.Count > 0)
         {
+            if (text.text == "Not Connected")
+                text.text = "";
             foreach(var str in msgs)
             {
                 text.text += str + "\n";
